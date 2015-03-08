@@ -1,0 +1,14 @@
+#include <iostream>
+#include "Echiquier.h"
+
+
+
+using namespace std;
+
+int main()
+{
+    Echiquier e;
+    e.print();
+    Piece Pb;
+
+}
