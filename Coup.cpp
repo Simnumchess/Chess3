@@ -6,7 +6,7 @@
 
 bool Coup::prise_piece(Echiquier e)
 {
-    if (e.echectab[nouvelle_l][nouvelle_c].type_piece.Nom_piece==Piecevide)
+    if (e.echectab[nouvelle_l][nouvelle_c].type_piece==Piecevide)
     {
         return false;
     }
@@ -53,7 +53,7 @@ void Coup::conv_num_lettre(int n)
 
 void Coup::coda_std_cp(Echiquier e)
 {
-    switch (piece_jouee.type_piece.Nom_piece)
+    switch (piece_jouee.type_piece)
         {
         case Pion:
         break;
