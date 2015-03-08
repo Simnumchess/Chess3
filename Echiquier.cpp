@@ -16,6 +16,7 @@ Echiquier::Echiquier() //initialisation
             for(int j=0;j<dim;j++)
             {
             Piece PV;
+            PV.type_piece=Piecevide;
             echectab[i][j]=PV;
             }
         }
@@ -23,68 +24,68 @@ Echiquier::Echiquier() //initialisation
     for(int i=0;i<dim;i++)
     {
         Piece Pb;
-        Pb.type_piece.Nom_piece=Pion;
+        Pb.type_piece=Pion;
         Pb.color=blanc;
         echectab[i][1]=Pb;
 
         Piece Pn;
-        Pn.type_piece.Nom_piece=Pion;
+        Pn.type_piece=Pion;
         Pn.color=noir;
         echectab[i][6]=Pn;
     }
         Piece Tb;
-        Tb.type_piece.Nom_piece=Tour;
+        Tb.type_piece=Tour;
         Tb.color=blanc;
         echectab[0][0]=Tb;
         echectab[7][0]=Tb;
 
         Piece Tn;
-        Tn.type_piece.Nom_piece=Tour;
+        Tn.type_piece=Tour;
         Tn.color=noir;
         echectab[0][7]=Tn;
         echectab[7][7]=Tn;
 
         Piece Cb;
-        Cb.type_piece.Nom_piece=Cavalier;
+        Cb.type_piece=Cavalier;
         Cb.color=blanc;
         echectab[1][0]=Cb;
         echectab[6][0]=Cb;
 
         Piece Cn;
-        Cn.type_piece.Nom_piece=Cavalier;
+        Cn.type_piece=Cavalier;
         Cn.color=noir;
         echectab[1][7]=Cn;
         echectab[6][7]=Cn;
 
         Piece Fb;
-        Fb.type_piece.Nom_piece=Fou;
+        Fb.type_piece=Fou;
         Fb.color=blanc;
         echectab[2][0]=Fb;
         echectab[5][0]=Fb;
 
         Piece Fn;
-        Fn.type_piece.Nom_piece=Fou;
+        Fn.type_piece=Fou;
         Fn.color=noir;
         echectab[2][7]=Fn;
         echectab[5][7]=Fn;
 
         Piece Db;
-        Db.type_piece.Nom_piece=Dame;
+        Db.type_piece=Dame;
         Db.color=blanc;
         echectab[3][0]=Db;
 
         Piece Dn;
-        Dn.type_piece.Nom_piece=Dame;
+        Dn.type_piece=Dame;
         Dn.color=noir;
         echectab[3][7]=Dn;
 
         Piece Rb;
-        Rb.type_piece.Nom_piece=Roi;
+        Rb.type_piece=Roi;
         Rb.color=blanc;
         echectab[4][0]=Rb;
 
         Piece Rn;
-        Rn.type_piece.Nom_piece=Roi;
+        Rn.type_piece=Roi;
         Rn.color=noir;
         echectab[4][7]=Rn;
 
@@ -136,44 +137,6 @@ void Echiquier::print()
                         }
                 cout<<echec_tab_indicel[j];
         }
-
-    /*cout<<"    ";//4 espaces
-    for(int i=0;i<dim;i++)
-        {
-            cout<<echec_tab_indicec[i]<<" ";
-
-        for(int j=0;j<8;j++)
-            {
-                    Piece P;
-                    P=echectab[i][j];
-                    P.print();
-            }
-            cout<<echec_tab_indicec[i]<<endl;
-        }
-    */
-    /*for(int k=0;k<dim;k++)
-    {
-        cout<<"  ";
-        cout<<echec_tab_indicel[k]<<"  ";
-        cout<<endl;
-    }
-    cout<<"    ";//4 espaces
-    for(int i=0;i<dim;i++)
-        {
-            cout<<echec_tab_indicec[i]<<" ";
-
-        for(int j=0;j<8;j++)
-            {
-                    Piece P;
-                    P=echectab[i][j];
-                    P.print();
-            }
-            cout<<echec_tab_indicec[i]<<endl;
-        }
-        */
-
-
-
 }
 
 Echiquier::Echiquier(const Echiquier & Echec) //constructeur par copie
@@ -203,7 +166,7 @@ Echiquier & Echiquier::operator=(const Echiquier & Echec) //operator par copie
 }
 bool Echiquier::casevide(int l,int c)
 {
-    if(echectab[l][c].type_piece.Nom_piece==Piecevide)
+    if(echectab[l][c].type_piece==Piecevide)
     return true;
     else
     return false;
