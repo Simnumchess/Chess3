@@ -1,211 +1,32 @@
-#include "Echiquier.h"
-#include "Piece.h"
-#include <iostream>
-#include <ostream>
+#ifndef PIECE_H_INCLUDED
+#define PIECE_H_INCLUDED
+
+enum type {Roi, Dame, Tour, Cavalier, Fou, Pion, Piecevide};
+enum couleur {noir,blanc};
 
 using namespace std;
 
-Echiquier::Echiquier() //initialisation
+class Piece
 {
-    dim=8;
-    echectab=new Piece*[dim];
-    for(int i=0;i<dim;i++)
-    {
-        echectab[i]=new Piece[dim];
-        {
-            for(int j=0;j<dim;j++)
-            {
-            Piece PV;
-            echectab[i][j]=PV;
-            }
-        }
-    }
-    for(int i=0;i<dim;i++)
-    {
-        Piece Pb;
-        Pb.type_piece.Nom_piece=Pion;
-        Pb.color=blanc;
-        echectab[i][1]=Pb;
+    public:
 
-        Piece Pn;
-        Pn.type_piece.Nom_piece=Pion;
-        Pn.color=noir;
-        echectab[i][6]=Pn;
-    }
-        Piece Tb;
-        Tb.type_piece.Nom_piece=Tour;
-        Tb.color=blanc;
-        echectab[0][0]=Tb;
-        echectab[7][0]=Tb;
+    couleur color; //definition de la couleur d'une piece: {blanc, noir}
+    int depla_rela_l; //la position d'une piece en ligne apres un deplacement
+    int depla_rela_c; //la position d'une piece en colone apres un deplacement
+    type type_piece; //definition du type d'une piece: {Roi, Dame, Tour, Cavalier, FOu, Pion, Piecevide}
+    int val; //valeur d'une piece: val_roi=0; val_pion=v; val_reine=9*v; val_tour=5*v; val_fou=3*v; val_cavalier=3*v
+    int position_l; //la position d'une piece en ligne apres un deplacement
+    int position_c; //la position d'une piece en colone apres un deplacement
 
-        Piece Tn;
-        Tn.type_piece.Nom_piece=Tour;
-        Tn.color=noir;
-        echectab[0][7]=Tn;
-        echectab[7][7]=Tn;
+    void print(); //print d'une piece selon son type
+    //int i; //numéro de ligne de la piece avant déplacement
+    //int j; //numéro de la colonne de la piece avant déplacement
+    //bool deplacement(); //regarde si on peut faire un deplacement
+    //int val; //valeur d'une piece: val_roi=0; val_pion=v; val_reine=9*v; val_tour=5*v; val_fou=3*v; val_cavalier=3*v
+    int getvaleurpiece(); //renvoie la valeur d'une piece selon son type
+    Piece(); //constructeur d'une piece
+    ~Piece();
+    Piece & operator=(const Piece &); //operateur=
+};
 
-        Piece Cb;
-        Cb.type_piece.Nom_piece=Cavalier;
-        Cb.color=blanc;
-        echectab[1][0]=Cb;
-        echectab[6][0]=Cb;
-
-        Piece Cn;
-        Cn.type_piece.Nom_piece=Cavalier;
-        Cn.color=noir;
-        echectab[1][7]=Cn;
-        echectab[6][7]=Cn;
-
-        Piece Fb;
-        Fb.type_piece.Nom_piece=Fou;
-        Fb.color=blanc;
-        echectab[2][0]=Fb;
-        echectab[5][0]=Fb;
-
-        Piece Fn;
-        Fn.type_piece.Nom_piece=Fou;
-        Fn.color=noir;
-        echectab[2][7]=Fn;
-        echectab[5][7]=Fn;
-
-        Piece Db;
-        Db.type_piece.Nom_piece=Dame;
-        Db.color=blanc;
-        echectab[3][0]=Db;
-
-        Piece Dn;
-        Dn.type_piece.Nom_piece=Dame;
-        Dn.color=noir;
-        echectab[3][7]=Dn;
-
-        Piece Rb;
-        Rb.type_piece.Nom_piece=Roi;
-        Rb.color=blanc;
-        echectab[4][0]=Rb;
-
-        Piece Rn;
-        Rn.type_piece.Nom_piece=Roi;
-        Rn.color=noir;
-        echectab[4][7]=Rn;
-
-
-}
-Echiquier::~Echiquier()
-{
-    if(echectab!=NULL)
-    {
-        for(int i=0;i<8;i++)
-        {
-            delete []echectab[i];
-            delete []echectab;
-        }
-    }
-}
-void Echiquier::print()
-{
-    char echec_tab_indicel[8];
-    char echec_tab_indicec[8];
-    echec_tab_indicel[0]='8';
-    echec_tab_indicel[1]='7';
-    echec_tab_indicel[2]='6';
-    echec_tab_indicel[3]='5';
-    echec_tab_indicel[4]='4';
-    echec_tab_indicel[5]='3';
-    echec_tab_indicel[6]='2';
-    echec_tab_indicel[7]='1';
-
-    echec_tab_indicec[0]='A';
-    echec_tab_indicec[1]='B';
-    echec_tab_indicec[2]='C';
-    echec_tab_indicec[3]='D';
-    echec_tab_indicec[4]='E';
-    echec_tab_indicec[5]='F';
-    echec_tab_indicec[6]='G';
-    echec_tab_indicec[7]='H';
-
-    for(int k=0;k<dim;k++)
-        {
-                cout<<echec_tab_indicec[k]<<"  ";
-        }
-    for (int j=0; j<dim; j++)
-        {
-                cout<<endl;
-                for (int i=0; i<dim; i++)
-                        {
-                            echectab[i][j].print();
-                        }
-                cout<<echec_tab_indicel[j];
-        }
-
-    /*cout<<"    ";//4 espaces
-    for(int i=0;i<dim;i++)
-        {
-            cout<<echec_tab_indicec[i]<<" ";
-
-        for(int j=0;j<8;j++)
-            {
-                    Piece P;
-                    P=echectab[i][j];
-                    P.print();
-            }
-            cout<<echec_tab_indicec[i]<<endl;
-        }
-    */
-    /*for(int k=0;k<dim;k++)
-    {
-        cout<<"  ";
-        cout<<echec_tab_indicel[k]<<"  ";
-        cout<<endl;
-    }
-    cout<<"    ";//4 espaces
-    for(int i=0;i<dim;i++)
-        {
-            cout<<echec_tab_indicec[i]<<" ";
-
-        for(int j=0;j<8;j++)
-            {
-                    Piece P;
-                    P=echectab[i][j];
-                    P.print();
-            }
-            cout<<echec_tab_indicec[i]<<endl;
-        }
-        */
-
-
-
-}
-
-Echiquier::Echiquier(const Echiquier & Echec) //constructeur par copie
-{
-    dim=Echec.dim;
-    echectab=new Piece*[dim];
-    for(int i=0;i<dim;i++)
-    {
-        for(int j=0;j<dim;j++) {echectab[i][j]=Echec.echectab[i][j];}
-    }
-
-}
-Echiquier & Echiquier::operator=(const Echiquier & Echec) //operator par copie
-{
-    dim=Echec.dim;
-    echectab=NULL;
-    if(dim<=0)
-    return *this;
-    echectab=new Piece*[8];
-     for(int i=0;i<dim;i++)
-    {
-        for(int j=0;j<dim;j++)
-        echectab[i][j]=Echec.echectab[i][j];
-    }
-    return *this;
-
-}
-bool Echiquier::casevide(int l,int c)
-{
-    if(echectab[l][c].type_piece.Nom_piece==Piecevide)
-    return true;
-    else
-    return false;
-}
-
+#endif // PIECE_H_INCLUDED
